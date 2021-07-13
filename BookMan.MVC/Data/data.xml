@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<ArrayOfBook xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Book>
+    <Id>2</Id>
+    <Name>Pro ASP.NET Core</Name>
+    <Authors>Putin V.</Authors>
+    <Publisher>Moscow</Publisher>
+    <Year>2020</Year>
+  </Book>
+  <Book>
+    <Id>3</Id>
+    <Name>ASP.NET Core video course</Name>
+    <Authors>Obama B.</Authors>
+    <Publisher>Washington</Publisher>
+    <Year>2021</Year>
+  </Book>
+  <Book>
+    <Id>4</Id>
+    <Name>Programing ASP.NET Core MVC</Name>
+    <Authors>Clinton B.</Authors>
+    <Publisher>Washington</Publisher>
+    <Year>2020</Year>
+  </Book>
+  <Book>
+    <Id>5</Id>
+    <Name>ASP.NET Core Razor Pages</Name>
+    <Authors>Yelstin B.</Authors>
+    <Publisher>Moscow</Publisher>
+    <Year>2020</Year>
+  </Book>
+  <Book>
+    <Id>6</Id>
+    <Name>Hello</Name>
+    <Authors>Nguyễn Hồng Đạt</Authors>
+    <Publisher>TyHD</Publisher>
+    <Year>2021</Year>
+    <Description>This is a test file uploader</Description>
+    <DataFile>Ebook .NET Toàn tập_ Tập 1 - C# và .NET Framework (Lập trình Visual C# thế nào_) - Dương Quang Thiện_755503.pdf</DataFile>
+  </Book>
+  <Book>
+    <Id>7</Id>
+    <Name>Hello2</Name>
+    <Authors>ABC</Authors>
+    <Publisher>TyHD</Publisher>
+    <Year>2021</Year>
+  </Book>
+</ArrayOfBook>

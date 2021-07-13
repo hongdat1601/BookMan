@@ -1,0 +1,19 @@
+﻿@model BookMan.MVC.Models.Book
+
+@{
+    ViewData["Title"] = "Create a new book";
+}
+
+<p class="h3">Add a new book</p>
+<hr />
+
+<form asp-action="Create" enctype="multipart/form-data">
+
+    <partial name="_Form" model="Model" />
+
+    <hr />
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-outline-primary btn-sm" /> |
+        <a asp-action="Index" class="btn btn-sm btn-outline-secondary">Back to List</a>
+    </div>
+</form>

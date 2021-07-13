@@ -1,0 +1,19 @@
+﻿@model BookMan.MVC.Models.Book
+<div>
+    <p class="h3">@Model.Name</p>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2"><label asp-for="Name"></label></dt>
+        <dd class="col-sm-10">@Model.Name</dd>
+        <dt class="col-sm-2"><label asp-for="Authors"></label></dt>
+        <dd class="col-sm-10">@Model.Authors</dd>
+        <dt class="col-sm-2"><label asp-for="Publisher"></label></dt>
+        <dd class="col-sm-10">@Model.Publisher</dd>
+        <dt class="col-sm-2"><label asp-for="Year"></label></dt>
+        <dd class="col-sm-10">@Model.Year</dd>
+        <dt class="col-sm-2"><label asp-for="DataFile"></label></dt>
+        <dd class="col-sm-10">@Model.DataFile</dd>
+        <dt class="col-sm-2"><label asp-for="Description"></label></dt>
+        <dd class="col-sm-10">@Model.Description</dd>
+    </dl>
+</div>

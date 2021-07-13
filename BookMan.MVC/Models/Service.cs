@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System.Xml.Serialization;
+using Microsoft.AspNetCore.Http;
+using System.Linq.Dynamic.Core;
 
 namespace BookMan.MVC.Models
 {
@@ -10,6 +12,7 @@ namespace BookMan.MVC.Models
     {
         private readonly string _dataFile = @"Data/data.xml";
         private readonly XmlSerializer _serializer = new XmlSerializer(typeof(HashSet<Book>));
+
         public HashSet<Book> Books { set; get; }
 
         public Service()
@@ -66,6 +69,60 @@ namespace BookMan.MVC.Models
         {
             using var stream = File.Create(_dataFile);
             _serializer.Serialize(stream, Books);
+        }
+
+        public string GetDataPath(string file) => $"Data/{file}";
+
+        public void Upload(Book book, IFormFile file)
+        {
+            if(file != null)
+            {
+                var path = GetDataPath(file.FileName);
+                using var stream = new FileStream(path, FileMode.Create);
+                file.CopyTo(stream);
+                book.DataFile = file.FileName;
+            }
+        }
+
+        public (Stream, string) Download(Book b)
+        {
+            var memory = new MemoryStream();
+            using var stream = new FileStream(GetDataPath(b.DataFile), FileMode.Open);
+            stream.CopyTo(memory);
+            memory.Position = 0;
+            var type = Path.GetExtension(b.DataFile) switch
+            {
+                "pdf" => "application/pdf",
+                "docx" => "application/vnd.ms-word",
+                "doc" => "application/vnd.ms-word",
+                "txt" => "text/plain",
+                _ => "application/pdf"
+            };
+
+            return (memory, type);
+        }
+
+        public Book[] Get(string search)
+        {
+            if (string.IsNullOrEmpty(search)) return Books.ToArray();
+
+            var s = search.ToLower();
+            return Books.Where(b =>
+                b.Name.ToLower().Contains(s) ||
+                b.Authors.ToLower().Contains(s) ||
+                b.Publisher.ToLower().Contains(s) ||
+                (string.IsNullOrEmpty(b.Description) ? false : b.Description.Contains(s)) ||
+                b.Year.ToString() == s
+            ).ToArray();
+        }
+
+        public (Book[] books, int pages, int page) Panging(int page, string orderBy="Name", bool dsc = false)
+        {
+            int size = 5;
+            int pages = (int)Math.Ceiling(Books.Count * 1.0 / size);
+            var books = Books.Skip((page - 1) * size).Take(size).AsQueryable().OrderBy($"{orderBy} {(dsc ? "descending" : "")}").ToArray();
+
+            return (books, pages, page);
         }
     }
 }
